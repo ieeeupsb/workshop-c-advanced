@@ -88,10 +88,11 @@ const char *avl_max(arvore_avl* avl);
 int avl_altura(no_avl* no);
 
 /**
- *  percorre a arvore em pre-ordem e imprime as strings de cada no'
- *  parametro: avl apontador para arvore
+ *  imprime a arvore avl apartir do no dado
+ *  parametro: no apontador para o no da arvore onde comecar
+ *  parametro: profundidade profundidade do no
  */
-void avl_imprime(arvore_avl* avl);
+void avl_imprime(no_avl *no, int profundidade);
 
 /**
  *  importa a informacao de uma lista de amizades para uma arvore AVL

@@ -82,16 +82,20 @@ const char *avl_max(arvore_avl* avl)
     return avl_no_valormax(avl->raiz)->nome;
 }
 
-void avl_imprime(arvore_avl* avl)
-{
-    if(avl == NULL)
+void avl_imprime(no_avl *no, int profundidade) {
+    int i;
+
+    if (no == NULL)
         return;
 
-    avl_preordem_impl(avl->raiz, 0);
-    printf("\n");
+    avl_imprime(no->direita, profundidade+1);
 
-    avl_preordem_impl(avl->raiz, 1);
-    printf("\n");
+    for(i = 0; i < 3 * profundidade; i++)
+        printf("     ");
+
+    printf("%s (%d)\n", no->nome, no->numAmigos);
+
+    avl_imprime(no->esquerda, profundidade+1);
 }
 
 arvore_avl *importa_lista_amizades(const char *nomeFicheiro) {
@@ -367,16 +371,3 @@ no_avl* avl_remove_impl(no_avl* no, const char *nome)
     return no;
 }
 
-void avl_preordem_impl(no_avl* no, int w)
-{
-    if(no == NULL)
-        return;
-
-    if(w)
-        printf("%d\t", no->numAmigos);
-    else
-        printf("%s\t", no->nome);
-
-    avl_preordem_impl(no->esquerda, w);
-    avl_preordem_impl(no->direita, w);
-}
