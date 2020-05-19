@@ -1,5 +1,5 @@
 # Exercício Hash Table
-Neste exercício é te pedido para implementares uma função capaz de copiar (ou mover informação) de uma hash table existente para uma nova, em que o tamanho desta pode ser diferente da original (qual a implicação para a tabela nova?). 
+Neste exercício é te pedido para implementares uma função capaz de copiar (ou mover informação) de uma hash table existente para uma nova, em que o tamanho desta pode ser diferente da original. 
 
 Usa a mesma função de dispersão da tabela original.
 
