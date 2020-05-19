@@ -1,30 +1,6 @@
-# Exercício Heap Binário
-No último exercício foi pedido que se criasse uma árvore AVL onde estão organizados os diferentes utilizadores de uma rede social bem como o seu número de amigos. O exercício foi feito por forma a procurar quem são as pessoas mais influentes nessa rede social. No entanto, de forma a encontrar mais rapidamente essa informação, pode-se reorganizar estes dados num heap em que a raiz contém o utilizador mais influente de todos.  
-Completa a função `avl_para_heap()` (no ficheiro *teste_heap.c*) na qual uma árvore AVL deve ser convertida num max-heap ordenado pelo número de amigos de cada utilizador.  
-O resultado esperado do programa é:  
-```
-                                                            Maria (3)
-                                             Carlos (3)
-                                                            Sofia (2)
-                              Pedro (4)
-                                                            Ines (2)
-                                             Jessica (3)
-                                                            Ricardo (3)
-               Joao (4)
-                                                            Rodrigo (1)
-                                             Ana (2)
-                                                            Vasco (2)
-                              Vanessa (4)
-                                                            Joaquim (3)
-                                             Vitor (4)
-                                                            Luisa (3)
-Filipe (4)
-                                             Diogo (1)
-                              Luis (2)
-                                             Jose (2)
-               Filipa (3)
-                                             Hugo (1)
-                              Nuno (2)
-                                             Manuel (2)
-```
-Mais uma vez há várias soluções possíveis, mas o resultado do programa deve ser na mesma um heap binário que respeita as propriedades estrutural e de ordem.
+# Exercício Hash Table
+Neste exercício é te pedido para implementares uma função capaz de copiar (ou mover informação) de uma hash table existente para uma nova, em que o tamanho desta pode ser diferente da original (qual a implicação para a tabela nova?). A tabela original deve ser apagada nessa mesma função, visto já não ser necessário ter informação duplicada.
+O ficheiro *tabdispersao.h* contem uma descrição do protótipo e dos parâmetros e retorno esperados.
+Completa a função `tabela_move()` (no ficheiro *tabdispersao.c*). Verifica também o ficheiro *teste_hash_table* que já contém o código necessário para testar a tua função, mas que te permite alterar o tamanho da nova tabela.
+
+Como o resultado esperado do programa depende do tamanho que escolheres, avisa um monitor quando terminares para ele confirmar rapidamente.
