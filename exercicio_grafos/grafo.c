@@ -33,20 +33,121 @@ void imprime_caminho(caminho *c)
     printf("\n");
 }
 
+/**
+ * @brief devolve o caminho mais longo a partir do último vertice do caminho c
+ * 
+ * @param g grafo
+ * @param c caminho até então
+ * @return caminho mais longo que pode encontrar
+ */
+caminho percorre_grafo(grafo *g, caminho c)
+{
+    int *curr = c.vertices;
+    int key = 0;
+    while (*curr != -1)
+    {
+        key++; // a posição no caminho onde se deve inserir um novo vértice
+        curr++;
+    }
+    int i = 0;
+    lista_no *aux = g->adjacencias[c.vertices[key-1]].inicio;
+    caminho *caminhos = malloc(sizeof(caminho) * (g->tamanho + 1));
+    while (aux != NULL) /* para cada aresta deste nó */
+    {
+        caminho *nc = copia_caminho(g, c); // copia para o novo caminho o caminho atual
+        nc->peso += aux->peso;             // incrementa o peso
+        nc->vertices[key] = aux->vertice;  // adiciona um vértice ao caminho
+        nc->vertices[key + 1] = -1;
+        caminhos[i] = percorre_grafo(g, *nc); // chama-se recursivamente para as arestas deste nó
+        i++;
+        aux = aux->proximo;
+        apaga_caminho(nc);
+    }
+
+    if (i == 0) // não há caminhos a sair deste vértice
+    {
+        free(caminhos);
+        int *new_vertices = malloc(sizeof(int) * (g->tamanho + 1));
+        memcpy(new_vertices, c.vertices, sizeof(int) * (g->tamanho + 1));
+        c.vertices = new_vertices;
+        return c; // o caminho mais longo até mim é o próprio caminho que eu recebi.
+    }
+    else if (i == 1) // só há 1 caminho
+    {
+        caminho nc;
+        nc.vertices = malloc(sizeof(int) * (g->tamanho + 1));
+        memcpy(nc.vertices, caminhos[0].vertices, sizeof(int) * (g->tamanho + 1));
+        nc.peso = caminhos[0].peso;
+
+        free(caminhos[0].vertices);
+        free(caminhos);
+        return nc;
+    }
+
+    caminhos[i].vertices = NULL;
+
+    long max = -2;
+    caminho *cMax = NULL;
+    caminho *caux = caminhos;
+    while (caux->vertices != NULL)
+    {
+        if (caux->peso >= max)
+        {
+            max = caux->peso;
+            if (cMax != NULL)
+                free(cMax->vertices);
+            cMax = caux;
+        }
+        else
+        {
+            free(caux->vertices);
+            caux->vertices = NULL;
+        }
+        caux++;
+    }
+    caminho cret = *cMax;
+    free(caminhos);
+    return cret;
+}
+
 caminho grafo_caminho_mais_longo(grafo *g)
 {
+    caminho *caminhos = malloc(sizeof(caminho) * (g->tamanho + 1));
+    caminhos[g->tamanho].peso = -1; // marca o fim
 
-    caminho c;
-    c.peso = 0;
-    c.vertices = malloc(sizeof(int) * (g->tamanho + 1));
-    c.vertices[0] = -1;
+    for (int origem = 0; origem < g->tamanho; origem++)
+    {
+        caminho c;
+        c.peso = 0;
+        c.vertices = malloc(sizeof(int) * (g->tamanho + 1));
+        c.vertices[0] = origem;
+        c.vertices[1] = -1;
+        caminhos[origem] = percorre_grafo(g, c); // c é passado por valor, i.e., é copiado
+        free(c.vertices);
+    }
 
-
-    /**
-     * completar
-     */
-
-    return c;
+    long max = -2;
+    caminho *cMax = NULL;
+    caminho *aux2 = caminhos;
+    while (aux2->peso != -1)
+    {
+        if (aux2->peso >= max)
+        {
+            max = aux2->peso;
+            if (cMax != NULL)
+                free(cMax->vertices);
+            cMax = aux2;
+        }
+        else
+        {
+            free(aux2->vertices);
+            aux2->vertices = NULL;
+        }
+        aux2++;
+    }
+    caminho cret = *cMax;
+    free(caminhos);
+    return cret;
 }
 
 /* cria no da lista de adjacencias */
