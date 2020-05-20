@@ -2,7 +2,7 @@
 
 ## [Presentation](https://docs.google.com/presentation/d/1Cn3VwZRC_rLW9_-pzFv5pIKUhyvCxi9VGteOduzadp4/edit?usp=sharing)
 
-## [Download](archive/master.zip)
+## [Download](https://github.com/ieeeupsb/workshop-c-advanced/archive/master.zip)
 
 ## Exercises:
 
