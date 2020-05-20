@@ -196,10 +196,26 @@ int tabela_esvazia(tabela_dispersao *td)
 
 tabela_dispersao* tabela_move(tabela_dispersao *td, int novo_tamanho){
 	
-	tabela_dispersao* nova = NULL;
+	elemento *elem;
+	int i;
 	
-	/* Completar aqui */
+	tabela_dispersao* nova = tabela_nova(novo_tamanho, td->hfunc);
 	
+	if(nova==NULL || tabela_numelementos(td)==0 || novo_tamanho<1){
+		return NULL;
+	}
+
+	for(i=0;i<td->tamanho;i++){
+		
+		elem = td->elementos[i];
+		
+		while(elem != NULL){
+			tabela_adiciona(nova, td->elementos[i]->obj->chave, td->elementos[i]->obj->valor);	
+			elem = elem->proximo;			
+		}		
+	}
+	
+	tabela_apaga(td);
 	return nova;
 }
 
