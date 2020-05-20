@@ -6,7 +6,7 @@
 
 ## Exercises:
 
-### [Graphs](exercicio_grafos/)
+### [Graphs](exercício_grafos/readme.md)
 
 ### [Hash Tables](exercicio_hash_table/)
 
