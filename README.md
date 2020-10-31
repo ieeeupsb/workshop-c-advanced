@@ -1,4 +1,5 @@
 # workshop-c-advanced by IEEE UP SB
+Workshop aimed to aid students at university programming classes but open to every one interested!
 
 ## [Presentation](https://docs.google.com/presentation/d/1Cn3VwZRC_rLW9_-pzFv5pIKUhyvCxi9VGteOduzadp4/edit?usp=sharing)
 
